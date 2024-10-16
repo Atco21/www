@@ -1,5 +1,6 @@
 <?php 
 session_start();
+
 ?>
 
 <!DOCTYPE html>
@@ -26,7 +27,6 @@ session_start();
 </div>
 
     <?php
-
         if(isset($_SESSION['error'])){
 
             echo "<p>";

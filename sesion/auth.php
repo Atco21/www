@@ -8,19 +8,25 @@ $password = $_POST['password'];
 
 $encontrado = false;
 
-//revisar para que no haga mas comprobaciones que las necesarias, es decir, con
+print_r($usuarios);
 
-if(!empty($usuario) && !empty($password)){
+$i=0;
 
-    while($encontrado == true){
-
-
-
-
+if (!empty($usuario) && !empty($password)) {
+    
+    while ($i < count($usuarios) && !$encontrado) {
+        if ($usuarios[$i]['usuario'] == $usuario && $usuarios[$i]['password'] == $password) {
+            $encontrado = true; 
+        }
+        $i++;
     }
 
-
+    if (!$encontrado) {
+    
+        $_SESSION['error'] = "usuario o contraseña incorrecta";
+    }
 } else {
-    $_SESSION['error'] = "usuario o contraseña incorrecta";
+
+    $_SESSION['error'] = "Debe proporcionar un usuario y una contraseña";
 }
 ?>
