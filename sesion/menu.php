@@ -1,5 +1,5 @@
 <?php
-session_start()
+session_start();
 ?>
 
 <!DOCTYPE html>
@@ -10,12 +10,28 @@ session_start()
     <title>Document</title>
 </head>
 <body>
-BIENVENIDO AL MENÚ: <?php echo $_SESSION['nombre'] ?>    
+<p style="text-align: left; margin-top: 2em; margin-left: 5em;">BIENVENIDO: <?php echo $_SESSION['nombre'];?><a href="./salir.php">Cerrar Sesion</a></p>
 
 
+<?php
+    if($_SESSION['rol'] == 'ROLE_PROFE'){
+?>
+        <div class="profesor" style="background-color: blue; padding: 2em; border-radius: 1.2em; margin:5em; text-align: center; ">
+            <p>PROFESOR</p>
+        </div>
+<?php
+}
+?>
 
-
-
+<?php
+    if($_SESSION['rol'] == 'ROLE_ALUMNO'){
+?>
+        <div class="profesor" style="background-color: red; padding: 2em; border-radius: 1.2em; color:white; margin:5em; text-align: center; ">
+            <p>ALUMNO</p>
+        </div>
+<?php
+}
+?>
 
 </body>
 </html>

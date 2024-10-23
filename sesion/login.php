@@ -1,6 +1,7 @@
 <?php 
 session_start();
 
+
 ?>
 
 <!DOCTYPE html>
@@ -9,37 +10,40 @@ session_start();
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Login</title>
+    <link rel="stylesheet" href="login.css">
 </head>
 <body>
 
-
-    
-<div style="margin:2em; display: flex;">
+<div class="login-container">
     <form action='./auth.php' method="post">
         <label for="usuario">Usuario:</label>
-        <input type="text" id="usuario" name="usuario" placeholder="Usuario">
+        <input type="text" id="usuario" name="usuario" placeholder="Usuario" required
+        <?php 
+        
+        if (isset($_COOKIE['recordar'])) {
+            echo 'value="' . $_COOKIE['recordar'] . '"';
+        }
+        ?>>
 
-        <label>Contraseña:</label>
-        <input type="password" id="password" name="password" placeholder="Contraseña">
+        <label for="password">Contraseña:</label>
+        <input type="password" id="password" name="password" placeholder="Contraseña" required>
+
+        <label>
+            Recordar
+            <input type="checkbox" name="recordar">
+        </label>
 
         <input type="submit" name="inicioSesion" value="Iniciar sesión">
     </form>
-</div>
 
     <?php
-        if(isset($_SESSION['error'])){
 
-            echo "<p>";
-
-            echo "".$_SESSION['error'];
-
-            echo "</p>";
-            
-        }
-        unset($_SESSION['error']);
-        
-        
+    if (isset($_SESSION['error'])) {
+        echo "<p class='error-message'>" . $_SESSION['error'] . "</p>";
+        unset($_SESSION['error']);  
+    }
     ?>
+</div>
 
 </body>
 </html>
