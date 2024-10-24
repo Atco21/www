@@ -1,40 +1,4 @@
-<?php 
 
-$array = []; // Para almacenar las puntuaciones totales por materia
-$asg = [];   // Para almacenar el conteo de asignaciones por materia
-
-// Abrir el archivo CSV
-$fitxer = fopen("notasalumnos.csv", "r");
-
-if ($fitxer) {
-    // Leer el archivo CSV
-    while (!feof($fitxer)) {
-        $line = fgets($fitxer);
-        // Comprobar si la línea no está vacía
-        if (!empty($line)) {
-            $porciones = explode(",", trim($line));
-
-            // Asegurarse de que hay al menos 3 elementos (materia, ID del alumno, puntuación)
-            if (isset($porciones[0]) && isset($porciones[1]) && isset($porciones[2])) {
-                $asginatura = $porciones[1];  // Asignatura
-                $numeroAlu = $porciones[2]; //Nota
-                $score = is_numeric($porciones[2]) ? (float)$porciones[2] : 0; // Validar y convertir la puntuación a float
-
-                // Inicializar los arreglos para las materias si no existen
-                if (!isset($array[$asginatura])) {
-                    $array[$asginatura] = 0; // Puntuación total para la materia
-                    $asg[$asginatura] = 0;   // Conteo de asignaciones para la materia
-                }
-                
-                $array[$asginatura] += $score; // Agregar la puntuación total para la materia
-                $asg[$asginatura] += 1;       // Incrementar el conteo de asignaciones para la materia
-            }
-        }
-    }
-    fclose($fitxer);
-}
-
-?>
 
 <!DOCTYPE html>
 <html lang="es">
@@ -42,31 +6,36 @@ if ($fitxer) {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Resumen de Notas</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css">
+
 </head>
 <body>
 
-<h2>Resumen de Notas y asignaturas</h2>
+<body class="d-flex justify-content-center align-items-center vh-100 bg-light">
 
-<table border="1">
-    <tr>
-        <th>Asignatura</th>
-        <th>Número de Asignaciones</th>
-        <th>Nota Media</th>
-    </tr>
-    <?php foreach ($array as $asginatura => $totalScore): ?>
-    <tr>
-        <td><?php echo $asginatura; ?></td>
-        <td><?php echo $asg[$asginatura]; ?></td>
-        <td>
-            <?php 
-            // Calcular la nota media
-            $notaMedia = $asg[$asginatura]= $totalScore / $asg[$asginatura]; 
-            echo htmlspecialchars(number_format($notaMedia, 2)); // Formatear a 2 decimales
-            ?>
-        </td>
-    </tr>
-    <?php endforeach; ?>
-</table>
+    <form action='./aniadir.php' method="post" class="d-flex flex-column align-items-center w-25 p-4 border rounded shadow">
+        <div class="form-group w-100 mb-3">
+            <label for="dni">ID</label>
+            <input type="text" id="dni" name="dni" class="form-control p-2" placeholder="Introduce DNI del alumno (00000 - 99999)" >
+        </div>
+
+        <div class="form-group w-100 mb-3">
+            <label for="asignatura">Asignatura</label>
+            <input type="text" id="asignatura" name="asignatura" class="form-control" placeholder="Introduce la asignatura" >
+        </div>
+
+        <div class="form-group w-100 mb-3">
+            <label for="nota">Nota</label>
+            <input type="number" id="nota" name="nota" class="form-control" step="0.1" min="0" max="10" placeholder="Introduce la nota">
+        </div>
+
+        <input type="submit" value="añadir" name="aniadir" class="btn btn-success w-100 mb-2">
+        <a href="tabla"><input type="submit" value="Tabla" name="tabla"  class="btn btn-primary w-100 mb-2"></a>
+        <input type="submit" value="Gráfica" name="grafica" class="btn btn-secondary w-100 mb-2">
+    </form>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
+</body>
 
 </body>
 </html>
