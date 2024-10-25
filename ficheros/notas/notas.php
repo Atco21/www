@@ -29,9 +29,9 @@
             <input type="number" id="nota" name="nota" class="form-control" step="0.1" min="0" max="10" placeholder="Introduce la nota">
         </div>
 
-        <input type="submit" value="añadir" name="aniadir" class="btn btn-success w-100 mb-2">
-        <a href="tabla"><input type="submit" value="Tabla" name="tabla"  class="btn btn-primary w-100 mb-2"></a>
-        <input type="submit" value="Gráfica" name="grafica" class="btn btn-secondary w-100 mb-2">
+        <input type="submit" value="Añadir" name="aniadir" class="btn btn-success w-100 mb-2">
+        <a href="mostrar.php" class="w-100"><input type="button" value="Tabla" name="tabla" class="btn btn-primary w-100 mb-2"></a>
+        <a href="grafica.php" class="w-100"><input type="button" value="Gráfica" name="grafica" class="btn btn-secondary w-100 mb-2"></a>
     </form>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
