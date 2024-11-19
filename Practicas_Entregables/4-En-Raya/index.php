@@ -1,20 +1,19 @@
 <?php
 session_start();
-
-if (!isset($_SESSION['array']) ) {
+if (!isset($_SESSION['array'])) {
 
     $_SESSION['array'] = [];
-    $x =1;
+    $x = 1;
 
     //$i fila
 
     //$j columna 
-    
+
 
     for ($i = 0; $i < 6; $i++) {
         for ($j = 0; $j < 7; $j++) {
 
-            $_SESSION['array'][$i][$j] = $x;
+            $_SESSION['array'][$i][$j] = 0;
 
             $x++;
         }
@@ -22,12 +21,9 @@ if (!isset($_SESSION['array']) ) {
     $_SESSION['res'] = "";
 }
 
-if(!isset($_SESSION['turno'])){
+if (!isset($_SESSION['turno'])) {
 
     $_SESSION['turno'] = 1;
-
-
-
 }
 
 
@@ -35,14 +31,16 @@ if(!isset($_SESSION['turno'])){
 
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>4-En_Raya</title>
 </head>
+
 <body>
 
-    
+
 
     <div style="display: flex; justify-content: center;">
         <table border="1" cellpadding="10">
@@ -58,29 +56,38 @@ if(!isset($_SESSION['turno'])){
             }
             ?>
             <form action="./action.php" method="post">
-            <tr>
-                <?php
-                    for($i = 1; $i<8; $i++){
-                        echo '<td><button type="submit" name="boton" value="'.$i.'">+</button></td>';
+                <tr>
+                    <?php
+                    for ($i = 1; $i < 8; $i++) {
+                        echo '<td><button type="submit" name="boton" value="' . $i . '">+</button></td>';
                     }
 
-                ?>
-            </tr>
+                    ?>
+                </tr>
             </form>
+            <br>
+
         </table>
+        <br>
 
 
+    </div>
 
+    <div style="display: flex; justify-content: center; margin-top:1em;">
+        <div style="margin:1em;">
+        <form action="./borrar.php" method="post">
+            <button type="submit" name="borrar" value="1">Borrar</button>
+        </form>
+        </div>
         <?php
-
-
-                    print_r($_SESSION['turno']);
-                    echo "<br>";
-                    print_r($_SESSION['res']);
+            echo"Turno: ";print_r($_SESSION['turno']);
+            echo "<br>";
+            echo"Última columna seleccionada: ";print_r($_SESSION['res']);
 
         ?>
+        
     </div>
+
 </body>
+
 </html>
-
-

@@ -1,35 +1,60 @@
 <?php 
 session_start(); 
-header("Location: ./index.php");
 
 
+function verGanador($turno){
+    
+    $_SESSION['res']=$turno;
 
-if($_POST){
+}
+
+if($_POST['boton']){
+    header("Location: ./index.php");
 
     // Allar columna en la que se ejecuta el post
     foreach ($_POST as $nombre => $value) {
-        $_SESSION['res']= $value;
+        
     }
-
-    $_SESSION['res'] = $value;
 
     if($_SESSION['turno'] == 1){
 
-        for($i = 0; $i < 6; $i++){
-            $_SESSION['array'][$i][$value] = 3;
+        $encontrado = false;
+
+        $i = 5;
+
+        while(!$encontrado && $i>=0){
+
+            if($_SESSION['array'][$i][$value-1] === 0){
+                $_SESSION['array'][$i][$value-1] = 1;
+                verGanador($_SESSION['turno']);
+                $_SESSION['turno'] = 2;
+                
+
+
+                $encontrado = true;
+                
+            }
+            $i--;
         }
-        $_SESSION['turno'] = 2;
-        exit();
+     
 
     }else{
-        for($i = 0; $i < 6; $i++){
-            $_SESSION['array'][$i][$value] = 3;
+        $encontrado2 = false;
+        $i = 5;
+        while(!$encontrado2 && $i>=0){
+
+            if($_SESSION['array'][$i][$value-1] === 0){
+                $_SESSION['array'][$i][$value-1] = 2;
+                verGanador($_SESSION['turno']);
+                $_SESSION['turno'] = 1;
+                $encontrado2 = true;
+            }
+            $i--;
         }
-        $_SESSION['turno']=1;
-        exit();
-    }
-    
+    }      
 }
+
+
 
 
 ?>
