@@ -46,7 +46,7 @@ for ($i = 2; $i < count($archivos); $i++) {
 
         echo '<form action="" method="post">';
         echo "<input type='hidden' name='eliminar' value='" . $archivos[$i] . "'>";
-        echo "<input type='submit¡' value='Eliminar'>";
+        echo "<input type='submit' value='Eliminar'>";
         echo '</form>';
     }
 }
